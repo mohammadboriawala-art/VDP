@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .question-section {
+            display: block;
+        }
+
+        .celebration-section {
+            display: none;
+        }
+
+        h1 {
+            color: #ff6b9d;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .gif-container {
+            margin: 30px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .gif-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            min-height: 150px;
+            position: relative;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            transform: scale(1);
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        #noBtn {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        #noBtn:hover {
+            background: #d0d0d0;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            position: absolute;
+            animation: confetti-fall 3s linear;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .celebration-section h2 {
+            color: #ff6b9d;
+            font-size: 3em;
+            margin-bottom: 30px;
+            animation: pulse 1s infinite;
+        }
+
+        .address-box {
+            background: #fff5f7;
+            border: 2px solid #ff6b9d;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .address-box h3 {
+            color: #ff6b9d;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .address-box p {
+            color: #666;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .heart {
+            color: #ff6b9d;
+            font-size: 2em;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Question Section -->
+        <div class="question-section" id="questionSection">
+            <h1>Will You Be My Valentine? <span class="heart">💕</span></h1>
+            
+            <div class="gif-container">
+                <img id="proposalGif" src="GIFF3.svg" alt="Cute proposal GIF">
+            </div>
+
+            <div class="button-container">
+                <button id="yesBtn" onclick="handleYes()">Yes! 💖</button>
+                <button id="noBtn" onclick="handleNo()">No</button>
+            </div>
+        </div>
+
+        <!-- Celebration Section -->
+        <div class="celebration-section" id="celebrationSection">
+            <h2>Yay! 🎉💕</h2>
+            <h3>She said YES!</h3>
+            
+            <div class="gif-container">
+                <!-- First celebration GIF - GIFF5 -->
+                <img id="celebrationGif" src="GIFF5.svg" alt="Celebration">
+            </div>
+
+            <div class="address-box">
+                <h3>📍 Our Valentine's Date</h3>
+                <p><strong>When:</strong> Friday, February 13th at 7:30 PM</p>
+                <p><strong>Where:</strong> The Annie Café & Bar, Houston</p>
+                <p><strong>Reservation:</strong> Confirmed for 2</p>
+                <p><strong>Dress Code:</strong> Wear something that makes you feel as beautiful as you already are 💃✨</p>
+                <p><strong>What to Expect:</strong> An amazing romantic dinner together! ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const proposalGif = document.getElementById('proposalGif');
+
+        function handleNo() {
+            noClickCount++;
+            
+            // Switch GIFs based on click count
+            if (noClickCount === 1) {
+                // First "No" click - switch to GIFF4
+                proposalGif.src = 'GIFF4.svg';
+            } else if (noClickCount === 2) {
+                // Second "No" click - switch to GIFF1
+                proposalGif.src = 'GIFF1.svg';
+            } else if (noClickCount >= 3) {
+                // Third+ "No" click - switch to GIFF2 and make button run away
+                proposalGif.src = 'GIFF2.svg';
+                makeNoButtonRunAway();
+            }
+            
+            // Each click makes the Yes button bigger
+            const newScale = 1 + (noClickCount * 0.3);
+            yesBtn.style.transform = `scale(${newScale})`;
+            
+            // Make No button smaller (only if not running away yet)
+            if (noClickCount < 3) {
+                const noScale = Math.max(0.5, 1 - (noClickCount * 0.1));
+                noBtn.style.transform = `scale(${noScale})`;
+            }
+            
+            // Optional: Change text on No button to make it fun
+            const noTexts = [
+                "Are you sure?",
+                "Really?? 🥺",
+                "AI and this universe won't take no as an answer! 🌟"
+            ];
+            
+            if (noClickCount <= noTexts.length) {
+                noBtn.textContent = noTexts[noClickCount - 1];
+            }
+        }
+
+        function makeNoButtonRunAway() {
+            noBtn.style.position = 'absolute';
+            noBtn.style.transition = 'all 0.3s ease';
+            
+            noBtn.addEventListener('mouseover', () => {
+                const container = document.querySelector('.button-container');
+                const containerRect = container.getBoundingClientRect();
+                
+                // Random position within the container
+                const maxX = containerRect.width - noBtn.offsetWidth;
+                const maxY = containerRect.height - noBtn.offsetHeight;
+                
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+                
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+            });
+            
+            // Also move on click attempt
+            noBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const container = document.querySelector('.button-container');
+                const containerRect = container.getBoundingClientRect();
+                
+                const maxX = containerRect.width - noBtn.offsetWidth;
+                const maxY = containerRect.height - noBtn.offsetHeight;
+                
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+                
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+            });
+        }
+
+        function handleYes() {
+            // Hide question section
+            document.getElementById('questionSection').style.display = 'none';
+            
+            // Show celebration section
+            document.getElementById('celebrationSection').style.display = 'block';
+            
+            // Create confetti
+            createConfetti();
+            
+            // After 3 seconds, switch to the final celebration GIF
+            setTimeout(() => {
+                const celebrationGif = document.getElementById('celebrationGif');
+                celebrationGif.src = 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHJ3cjJ5cHFiMjM2YnhvZGM0ZWR4dGxwMmRmM3JlYWNmb3U2MnBmZyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/g5R9dok94mrIvplmZd/giphy.gif';
+            }, 3000);
+        }
+
+        function createConfetti() {
+            const colors = ['#ff6b9d', '#f093fb', '#f5576c', '#fad0c4', '#a8edea'];
+            const confettiCount = 100;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.opacity = '1';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear`;
+                    confetti.style.zIndex = '1000';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 30);
+            }
+        }
+    </script>
+</body>
+</html>
