@@ -1,3 +1,6 @@
+Valentine proposal · HTML
+Copy
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -236,8 +239,12 @@
                 // Second "No" click - switch to GIFF1
                 proposalGif.src = 'GIFF1.svg';
             } else if (noClickCount >= 3) {
-                // Third+ "No" click - switch to GIFF2 and make button run away
+                // Third+ "No" click - switch to GIFF2
                 proposalGif.src = 'GIFF2.svg';
+            }
+            
+            // After 5 clicks, make button run away
+            if (noClickCount >= 5) {
                 makeNoButtonRunAway();
             }
             
@@ -245,17 +252,17 @@
             const newScale = 1 + (noClickCount * 0.3);
             yesBtn.style.transform = `scale(${newScale})`;
             
-            // Make No button smaller (only if not running away yet)
-            if (noClickCount < 3) {
-                const noScale = Math.max(0.5, 1 - (noClickCount * 0.1));
-                noBtn.style.transform = `scale(${noScale})`;
-            }
+            // Make No button smaller with each click
+            const noScale = Math.max(0.3, 1 - (noClickCount * 0.1));
+            noBtn.style.transform = `scale(${noScale})`;
             
-            // Optional: Change text on No button to make it fun
+            // Creative denial texts
             const noTexts = [
                 "Are you sure?",
                 "Really?? 🥺",
-                "AI and this universe won't take no as an answer! 🌟"
+                "Pretty please?",
+                "Just click Yes!",
+                "No"
             ];
             
             if (noClickCount <= noTexts.length) {
